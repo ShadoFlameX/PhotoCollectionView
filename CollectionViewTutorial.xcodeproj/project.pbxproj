@@ -16,8 +16,8 @@
 		0DD9B1C01645B7AE008EE1C5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1BF1645B7AE008EE1C5 /* Default.png */; };
 		0DD9B1C21645B7AE008EE1C5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C11645B7AE008EE1C5 /* Default@2x.png */; };
 		0DD9B1C41645B7AE008EE1C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C31645B7AE008EE1C5 /* Default-568h@2x.png */; };
-		0DD9B1C71645B7AE008EE1C5 /* BHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C61645B7AE008EE1C5 /* BHViewController.m */; };
-		0DD9B1CA1645B7AE008EE1C5 /* BHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C81645B7AE008EE1C5 /* BHViewController.xib */; };
+		0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */; };
+		0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,9 +34,9 @@
 		0DD9B1BF1645B7AE008EE1C5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0DD9B1C11645B7AE008EE1C5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0DD9B1C31645B7AE008EE1C5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0DD9B1C51645B7AE008EE1C5 /* BHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHViewController.h; sourceTree = "<group>"; };
-		0DD9B1C61645B7AE008EE1C5 /* BHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHViewController.m; sourceTree = "<group>"; };
-		0DD9B1C91645B7AE008EE1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHViewController.xib; sourceTree = "<group>"; };
+		0DD9B1C51645B7AE008EE1C5 /* BHCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHCollectionViewController.h; sourceTree = "<group>"; };
+		0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHCollectionViewController.m; sourceTree = "<group>"; };
+		0DD9B1C91645B7AE008EE1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHCollectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +85,7 @@
 			children = (
 				0DD9B1BC1645B7AE008EE1C5 /* BHAppDelegate.h */,
 				0DD9B1BD1645B7AE008EE1C5 /* BHAppDelegate.m */,
-				0DD9B1C51645B7AE008EE1C5 /* BHViewController.h */,
-				0DD9B1C61645B7AE008EE1C5 /* BHViewController.m */,
-				0DD9B1C81645B7AE008EE1C5 /* BHViewController.xib */,
+				0DD9B1D01645B8EA008EE1C5 /* View */,
 				0DD9B1B41645B7AE008EE1C5 /* Supporting Files */,
 			);
 			path = CollectionViewTutorial;
@@ -105,6 +103,16 @@
 				0DD9B1C31645B7AE008EE1C5 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0DD9B1D01645B8EA008EE1C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0DD9B1C51645B7AE008EE1C5 /* BHCollectionViewController.h */,
+				0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */,
+				0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,7 +171,7 @@
 				0DD9B1C01645B7AE008EE1C5 /* Default.png in Resources */,
 				0DD9B1C21645B7AE008EE1C5 /* Default@2x.png in Resources */,
 				0DD9B1C41645B7AE008EE1C5 /* Default-568h@2x.png in Resources */,
-				0DD9B1CA1645B7AE008EE1C5 /* BHViewController.xib in Resources */,
+				0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +184,7 @@
 			files = (
 				0DD9B1BA1645B7AE008EE1C5 /* main.m in Sources */,
 				0DD9B1BE1645B7AE008EE1C5 /* BHAppDelegate.m in Sources */,
-				0DD9B1C71645B7AE008EE1C5 /* BHViewController.m in Sources */,
+				0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,12 +199,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		0DD9B1C81645B7AE008EE1C5 /* BHViewController.xib */ = {
+		0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0DD9B1C91645B7AE008EE1C5 /* en */,
 			);
-			name = BHViewController.xib;
+			name = BHCollectionViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

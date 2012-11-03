@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class BHViewController;
+@class BHCollectionViewController;
 
 @interface BHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) BHViewController *viewController;
+@property (strong, nonatomic) BHCollectionViewController *viewController;
 
 @end

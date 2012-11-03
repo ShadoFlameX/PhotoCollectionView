@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Bryan Hansen. All rights reserved.
 //
 
-#import "BHViewController.h"
+#import "BHCollectionViewController.h"
 
-@interface BHViewController ()
+@interface BHCollectionViewController ()
 
 @end
 
-@implementation BHViewController
+@implementation BHCollectionViewController
 
 - (void)viewDidLoad
 {

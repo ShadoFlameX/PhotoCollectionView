@@ -8,7 +8,7 @@
 
 #import "BHAppDelegate.h"
 
-#import "BHViewController.h"
+#import "BHCollectionViewController.h"
 
 @implementation BHAppDelegate
 
@@ -16,7 +16,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[BHViewController alloc] initWithNibName:@"BHViewController" bundle:nil];
+    self.viewController = [[BHCollectionViewController alloc] initWithNibName:@"BHViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
