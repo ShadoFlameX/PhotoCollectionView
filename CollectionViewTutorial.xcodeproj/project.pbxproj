@@ -21,6 +21,7 @@
 		0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */; };
 		0DD9B1D61645BBFA008EE1C5 /* BHAlbumPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */; };
 		0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */; };
+		0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHAlbumPhotoCell.m; sourceTree = "<group>"; };
 		0DD9B1D81645BC63008EE1C5 /* UIColor+CollectionViewTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CollectionViewTutorial.h"; sourceTree = "<group>"; };
 		0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CollectionViewTutorial.m"; sourceTree = "<group>"; };
+		0DD9B1DC1645BDE0008EE1C5 /* BHPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHPhoto.h; sourceTree = "<group>"; };
+		0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHPhoto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,7 @@
 				0DD9B1BC1645B7AE008EE1C5 /* BHAppDelegate.h */,
 				0DD9B1BD1645B7AE008EE1C5 /* BHAppDelegate.m */,
 				0DD9B1D71645BC36008EE1C5 /* Extensions */,
+				0DD9B1DB1645BDCA008EE1C5 /* Model */,
 				0DD9B1D01645B8EA008EE1C5 /* View */,
 				0DD9B1B41645B7AE008EE1C5 /* Supporting Files */,
 			);
@@ -136,6 +140,15 @@
 				0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		0DD9B1DB1645BDCA008EE1C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0DD9B1DC1645BDE0008EE1C5 /* BHPhoto.h */,
+				0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +224,7 @@
 				0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */,
 				0DD9B1D61645BBFA008EE1C5 /* BHAlbumPhotoCell.m in Sources */,
 				0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */,
+				0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
