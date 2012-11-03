@@ -18,6 +18,7 @@
 		0DD9B1C41645B7AE008EE1C5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C31645B7AE008EE1C5 /* Default-568h@2x.png */; };
 		0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */; };
 		0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */; };
+		0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		0DD9B1C51645B7AE008EE1C5 /* BHCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BHCollectionViewController.h; sourceTree = "<group>"; };
 		0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BHCollectionViewController.m; sourceTree = "<group>"; };
 		0DD9B1C91645B7AE008EE1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHCollectionViewController.xib; sourceTree = "<group>"; };
+		0DD9B1D11645B97F008EE1C5 /* BHPhotoAlbumLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHPhotoAlbumLayout.h; sourceTree = "<group>"; };
+		0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHPhotoAlbumLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				0DD9B1C51645B7AE008EE1C5 /* BHCollectionViewController.h */,
 				0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */,
 				0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */,
+				0DD9B1D11645B97F008EE1C5 /* BHPhotoAlbumLayout.h */,
+				0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				0DD9B1BA1645B7AE008EE1C5 /* main.m in Sources */,
 				0DD9B1BE1645B7AE008EE1C5 /* BHAppDelegate.m in Sources */,
 				0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */,
+				0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
