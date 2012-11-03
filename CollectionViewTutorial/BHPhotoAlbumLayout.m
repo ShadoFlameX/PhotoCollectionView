@@ -10,4 +10,9 @@
 
 @implementation BHPhotoAlbumLayout
 
+- (void)prepareLayout
+{
+    NSLog(@"prepareLayout");
+}
+
 @end

@@ -10,6 +10,8 @@
 
 @interface UIColor (CollectionViewTutorial)
 
++ (UIColor *)albumBrowserBackgroundColor;
+
 + (UIColor *)albumPhotoBackgroundColor;
 
 @end

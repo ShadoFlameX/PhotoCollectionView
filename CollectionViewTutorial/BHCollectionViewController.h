@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BHCollectionViewController : UICollectionViewController
+@interface BHCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *albums;
 
