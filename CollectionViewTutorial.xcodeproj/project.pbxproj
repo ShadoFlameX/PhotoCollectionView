@@ -19,6 +19,8 @@
 		0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C61645B7AE008EE1C5 /* BHCollectionViewController.m */; };
 		0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */; };
 		0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */; };
+		0DD9B1D61645BBFA008EE1C5 /* BHAlbumPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */; };
+		0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,10 @@
 		0DD9B1C91645B7AE008EE1C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHCollectionViewController.xib; sourceTree = "<group>"; };
 		0DD9B1D11645B97F008EE1C5 /* BHPhotoAlbumLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHPhotoAlbumLayout.h; sourceTree = "<group>"; };
 		0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHPhotoAlbumLayout.m; sourceTree = "<group>"; };
+		0DD9B1D41645BBFA008EE1C5 /* BHAlbumPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHAlbumPhotoCell.h; sourceTree = "<group>"; };
+		0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHAlbumPhotoCell.m; sourceTree = "<group>"; };
+		0DD9B1D81645BC63008EE1C5 /* UIColor+CollectionViewTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CollectionViewTutorial.h"; sourceTree = "<group>"; };
+		0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CollectionViewTutorial.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,7 @@
 			children = (
 				0DD9B1BC1645B7AE008EE1C5 /* BHAppDelegate.h */,
 				0DD9B1BD1645B7AE008EE1C5 /* BHAppDelegate.m */,
+				0DD9B1D71645BC36008EE1C5 /* Extensions */,
 				0DD9B1D01645B8EA008EE1C5 /* View */,
 				0DD9B1B41645B7AE008EE1C5 /* Supporting Files */,
 			);
@@ -116,8 +123,19 @@
 				0DD9B1C81645B7AE008EE1C5 /* BHCollectionViewController.xib */,
 				0DD9B1D11645B97F008EE1C5 /* BHPhotoAlbumLayout.h */,
 				0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */,
+				0DD9B1D41645BBFA008EE1C5 /* BHAlbumPhotoCell.h */,
+				0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		0DD9B1D71645BC36008EE1C5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0DD9B1D81645BC63008EE1C5 /* UIColor+CollectionViewTutorial.h */,
+				0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +209,8 @@
 				0DD9B1BE1645B7AE008EE1C5 /* BHAppDelegate.m in Sources */,
 				0DD9B1C71645B7AE008EE1C5 /* BHCollectionViewController.m in Sources */,
 				0DD9B1D31645B97F008EE1C5 /* BHPhotoAlbumLayout.m in Sources */,
+				0DD9B1D61645BBFA008EE1C5 /* BHAlbumPhotoCell.m in Sources */,
+				0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
