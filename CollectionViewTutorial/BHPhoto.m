@@ -16,6 +16,11 @@
 
 @implementation BHPhoto
 
++ (BHPhoto *)photoWithImageURL:(NSURL *)imageURL
+{
+    return [[self alloc] initWithImageURL:imageURL];
+}
+
 - (id)initWithImageURL:(NSURL *)imageURL
 {
     self = [super init];

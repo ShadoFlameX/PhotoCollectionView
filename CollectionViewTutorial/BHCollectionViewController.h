@@ -10,4 +10,6 @@
 
 @interface BHCollectionViewController : UICollectionViewController
 
+@property (nonatomic, strong) NSMutableArray *albums;
+
 @end

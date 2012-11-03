@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong, readonly) NSURL *imageURL;
 
++ (BHPhoto *)photoWithImageURL:(NSURL *)imageURL;
+
 - (id)initWithImageURL:(NSURL *)imageURL;
 
 @end

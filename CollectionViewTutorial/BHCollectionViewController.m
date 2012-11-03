@@ -7,6 +7,8 @@
 //
 
 #import "BHCollectionViewController.h"
+#import "BHAlbum.h"
+#import "BHPhoto.h"
 
 @interface BHCollectionViewController ()
 
@@ -17,7 +19,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    for (int a=0; a<10; a++) {
+        BHAlbum *album = [[BHAlbum alloc] init];
+        
+        for (int p=0; p<10; p++) {
+            BHPhoto *photo = [BHPhoto photoWithImageURL:nil];
+            [album addPhoto:photo];
+        }
+        
+        [self.albums addObject:album];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

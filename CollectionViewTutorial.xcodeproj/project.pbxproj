@@ -23,6 +23,7 @@
 		0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */; };
 		0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */; };
 		0DD9B1E11645BF26008EE1C5 /* BHAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1E01645BF26008EE1C5 /* BHAlbum.m */; };
+		0DD9B1E61645C1F1008EE1C5 /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHPhoto.m; sourceTree = "<group>"; };
 		0DD9B1DF1645BF26008EE1C5 /* BHAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHAlbum.h; sourceTree = "<group>"; };
 		0DD9B1E01645BF26008EE1C5 /* BHAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHAlbum.m; sourceTree = "<group>"; };
+		0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo1.jpg; path = Images/Photos/photo1.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		0DD9B1B41645B7AE008EE1C5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0DD9B1E41645C16C008EE1C5 /* Images */,
 				0DD9B1B51645B7AE008EE1C5 /* CollectionViewTutorial-Info.plist */,
 				0DD9B1B61645B7AE008EE1C5 /* InfoPlist.strings */,
 				0DD9B1B91645B7AE008EE1C5 /* main.m */,
@@ -154,6 +157,22 @@
 				0DD9B1E01645BF26008EE1C5 /* BHAlbum.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		0DD9B1E21645C159008EE1C5 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */,
+			);
+			name = Photos;
+			sourceTree = "<group>";
+		};
+		0DD9B1E41645C16C008EE1C5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0DD9B1E21645C159008EE1C5 /* Photos */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +232,7 @@
 				0DD9B1C21645B7AE008EE1C5 /* Default@2x.png in Resources */,
 				0DD9B1C41645B7AE008EE1C5 /* Default-568h@2x.png in Resources */,
 				0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */,
+				0DD9B1E61645C1F1008EE1C5 /* photo1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
