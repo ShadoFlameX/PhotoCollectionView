@@ -19,12 +19,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Images/Photos/"];
 	
     for (int a=0; a<10; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         
         for (int p=0; p<10; p++) {
-            BHPhoto *photo = [BHPhoto photoWithImageURL:nil];
+            NSString *photoFilename = [NSString stringWithFormat:@"photo%d.jpg",1];
+            
+            BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
             [album addPhoto:photo];
         }
         
