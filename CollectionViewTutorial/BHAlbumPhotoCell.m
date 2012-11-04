@@ -30,9 +30,10 @@
         self.layer.borderColor = [UIColor photoBorderColor].CGColor;
         self.layer.borderWidth = 3.0f;
         self.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.layer.shadowRadius = 2.0f;
-        self.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
-        self.layer.shadowOpacity = 0.25f;
+        self.layer.shadowRadius = 3.0f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+        self.layer.shadowOpacity = 0.5f;
+        self.layer.shouldRasterize = YES;
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

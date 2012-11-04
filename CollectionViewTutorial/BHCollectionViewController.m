@@ -30,11 +30,6 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
 {
     [super viewDidLoad];
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        PhotoLoadQueue = dispatch_queue_create("com.skeuo.photo_load_queue", DISPATCH_QUEUE_SERIAL);
-    });
-    
     self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
     
     self.albums = [NSMutableArray array];
@@ -43,7 +38,7 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
 	
     for (int a=0; a<10; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
-        
+
         for (int p=0; p<3; p++) {
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",1]; //TODO: load some other photos
             
@@ -54,7 +49,12 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
         [self.albums addObject:album];
     }
     
-    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];    
+    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        PhotoLoadQueue = dispatch_queue_create("com.skeuo.photo_load_queue", DISPATCH_QUEUE_SERIAL);
+    });
 }
 
 - (void)didReceiveMemoryWarning

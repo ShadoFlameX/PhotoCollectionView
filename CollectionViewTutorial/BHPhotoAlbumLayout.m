@@ -8,9 +8,16 @@
 
 #import "BHPhotoAlbumLayout.h"
 
+static NSUInteger const RotationCount = 20;
+static NSUInteger const RotationStride = 3;
+
 @interface BHPhotoAlbumLayout ()
 
 @property (nonatomic, strong) NSDictionary *layoutInfo;
+@property (nonatomic, strong) NSArray *rotations;
+
+- (CGRect)frameForAlbumPhotoAtIndex:(NSIndexPath *)indexPath;
+- (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath;
 
 @end
 
@@ -74,6 +81,25 @@
     self.itemSize = CGSizeMake(125.0f, 125.0f);
     self.interItemSpacing = 24.0f;
     self.numberOfColumns = 2;
+    
+    NSMutableArray *rotations = [NSMutableArray arrayWithCapacity:RotationCount];
+    
+    CGFloat percentage = 0.0f;
+    for (int i=0; i<RotationCount; i++) {
+        // ensure that each angle is different enough to be seen
+        CGFloat newPercentage = 0.0f;
+        do {
+            newPercentage = ((CGFloat)(arc4random() % 200) - 100) * 0.0001f;
+        } while (fabsf(percentage - newPercentage) < 0.008);
+        percentage = newPercentage;
+        
+        CGFloat angle = 2 * M_PI * (1.0f + percentage);
+        CATransform3D transform = CATransform3DMakeRotation(angle, 0.0f, 0.0f, 1.0f);
+        
+        [rotations addObject:[NSValue valueWithCATransform3D:transform]];
+    }
+    
+    self.rotations = rotations;
 }
 
 
@@ -81,7 +107,7 @@
 
 - (CGSize)collectionViewContentSize
 {
-    NSInteger rowCount = [self.collectionView numberOfSections] / 2;
+    NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
     
     CGFloat width = self.itemInsets.left +
                     self.numberOfColumns * self.itemSize.width + (self.numberOfColumns - 1) * self.interItemSpacing +
@@ -109,6 +135,7 @@
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             attributes.frame = [self frameForAlbumPhotoAtIndex:indexPath];
             attributes.zIndex = indexPath.row == 0 ? 1 : 0;
+            attributes.transform3D = [self transformForAlbumPhotoAtIndex:indexPath];
             
             [newLayoutInfo setObject:attributes forKey:indexPath];
         }
@@ -136,6 +163,9 @@
     return [self.layoutInfo objectForKey:indexPath];
 }
 
+
+#pragma mark - Private
+
 - (CGRect)frameForAlbumPhotoAtIndex:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.section / self.numberOfColumns;
@@ -145,6 +175,11 @@
     CGFloat originY = self.itemInsets.top + (self.itemSize.height + self.interItemSpacing) * row;
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.width);
+}
+
+- (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath
+{
+    return [[self.rotations objectAtIndex:(indexPath.section * RotationStride + indexPath.row) % RotationCount] CATransform3DValue];
 }
 
 @end
