@@ -11,10 +11,27 @@
 @interface BHPhoto ()
 
 @property (nonatomic, strong, readwrite) NSURL *imageURL;
+@property (nonatomic, strong, readwrite) UIImage *image;
 
 @end
 
 @implementation BHPhoto
+
+#pragma mark - Properties
+
+- (UIImage *)image
+{
+    if (!_image && self.imageURL) {
+        NSData *imageData = [NSData dataWithContentsOfURL:self.imageURL];
+        UIImage *image = [UIImage imageWithData:imageData scale:[UIScreen mainScreen].scale];
+        
+        _image = image;
+    }
+    
+    return _image;
+}
+
+#pragma mark - Lifecycle
 
 + (BHPhoto *)photoWithImageURL:(NSURL *)imageURL
 {

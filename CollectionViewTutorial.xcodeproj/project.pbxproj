@@ -23,7 +23,7 @@
 		0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1D91645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m */; };
 		0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */; };
 		0DD9B1E11645BF26008EE1C5 /* BHAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD9B1E01645BF26008EE1C5 /* BHAlbum.m */; };
-		0DD9B1E61645C1F1008EE1C5 /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */; };
+		0DD9B20616462154008EE1C5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD9B20516462154008EE1C5 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		0DD9B1DD1645BDE0008EE1C5 /* BHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHPhoto.m; sourceTree = "<group>"; };
 		0DD9B1DF1645BF26008EE1C5 /* BHAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHAlbum.h; sourceTree = "<group>"; };
 		0DD9B1E01645BF26008EE1C5 /* BHAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHAlbum.m; sourceTree = "<group>"; };
-		0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo1.jpg; path = Images/Photos/photo1.jpg; sourceTree = SOURCE_ROOT; };
+		0DD9B20516462154008EE1C5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD9B20616462154008EE1C5 /* QuartzCore.framework in Frameworks */,
 				0DD9B1AE1645B7AE008EE1C5 /* UIKit.framework in Frameworks */,
 				0DD9B1B01645B7AE008EE1C5 /* Foundation.framework in Frameworks */,
 				0DD9B1B21645B7AE008EE1C5 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +74,7 @@
 		0DD9B19E1645B7AE008EE1C5 = {
 			isa = PBXGroup;
 			children = (
+				0DD9B20516462154008EE1C5 /* QuartzCore.framework */,
 				0DD9B1B31645B7AE008EE1C5 /* CollectionViewTutorial */,
 				0DD9B1AC1645B7AE008EE1C5 /* Frameworks */,
 				0DD9B1AA1645B7AE008EE1C5 /* Products */,
@@ -159,18 +161,9 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		0DD9B1E21645C159008EE1C5 /* Photos */ = {
-			isa = PBXGroup;
-			children = (
-				0DD9B1E51645C1F1008EE1C5 /* photo1.jpg */,
-			);
-			name = Photos;
-			sourceTree = "<group>";
-		};
 		0DD9B1E41645C16C008EE1C5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				0DD9B1E21645C159008EE1C5 /* Photos */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -232,7 +225,6 @@
 				0DD9B1C21645B7AE008EE1C5 /* Default@2x.png in Resources */,
 				0DD9B1C41645B7AE008EE1C5 /* Default-568h@2x.png in Resources */,
 				0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */,
-				0DD9B1E61645C1F1008EE1C5 /* photo1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

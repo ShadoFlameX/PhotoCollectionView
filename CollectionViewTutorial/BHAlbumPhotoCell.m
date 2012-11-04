@@ -8,6 +8,14 @@
 
 #import "BHAlbumPhotoCell.h"
 #import "UIColor+CollectionViewTutorial.h"
+#import "UIColor+CollectionViewTutorial.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface BHAlbumPhotoCell ()
+
+@property (nonatomic, strong, readwrite) UIImageView *imageView;
+
+@end
 
 @implementation BHAlbumPhotoCell
 
@@ -16,17 +24,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor albumPhotoBackgroundColor];
+        
+        self.layer.borderColor = [UIColor photoBorderColor].CGColor;
+        self.layer.borderWidth = 3.0f;
+        
+        self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.clipsToBounds = YES;
+        
+        [self addSubview:self.imageView];
     }
+
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

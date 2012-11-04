@@ -20,4 +20,9 @@
     return [UIColor colorWithRed:0.330f green:.0270 blue:0.250 alpha:1.0f];
 }
 
++ (UIColor *)photoBorderColor
+{
+    return [UIColor whiteColor];
+}
+
 @end

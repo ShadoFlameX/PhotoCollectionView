@@ -14,4 +14,6 @@
 
 + (UIColor *)albumPhotoBackgroundColor;
 
++ (UIColor *)photoBorderColor;
+
 @end

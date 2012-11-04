@@ -14,6 +14,7 @@
 #import "UIColor+CollectionViewTutorial.h"
 
 static NSString * const PhotoCellIdentifier = @"PhotoCell";
+static dispatch_queue_t PhotoLoadQueue = NULL;
 
 @interface BHCollectionViewController ()
 
@@ -29,17 +30,22 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 {
     [super viewDidLoad];
     
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        PhotoLoadQueue = dispatch_queue_create("com.skeuo.photo_load_queue", DISPATCH_QUEUE_SERIAL);
+    });
+    
     self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
     
     self.albums = [NSMutableArray array];
 
-    NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Images/Photos/"];
+    NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Photos/"];
 	
     for (int a=0; a<10; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         
-        for (int p=0; p<10; p++) {
-            NSString *photoFilename = [NSString stringWithFormat:@"photo%d.jpg",1]; //TODO: load some other photos
+        for (int p=0; p<3; p++) {
+            NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",1]; //TODO: load some other photos
             
             BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
             [album addPhoto:photo];
@@ -67,6 +73,21 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BHAlbumPhotoCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier forIndexPath:indexPath];
+    
+    BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
+    BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
+    
+    __weak BHCollectionViewController *weakSelf = self;
+    dispatch_async(PhotoLoadQueue, ^{
+        UIImage *image = [photo image];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
+                BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
+                cell.imageView.image = image;
+            }
+        });
+    });
 
     return photoCell;
 }

@@ -11,6 +11,7 @@
 @interface BHPhoto : NSObject
 
 @property (nonatomic, strong, readonly) NSURL *imageURL;
+@property (nonatomic, strong, readonly) UIImage *image;
 
 + (BHPhoto *)photoWithImageURL:(NSURL *)imageURL;
 
