@@ -34,11 +34,29 @@ static NSUInteger const RotationStride = 3;
     [self invalidateLayout];
 }
 
-- (void)setInterItemSpacing:(CGFloat)interItemSpacing
+- (void)setItemSize:(CGSize)itemSize
 {
-    if (_interItemSpacing == interItemSpacing) return;
+    if (CGSizeEqualToSize(_itemSize, itemSize)) return;
+    
+    _itemSize = itemSize;
+    
+    [self invalidateLayout];
+}
+
+- (void)setInterItemSpacing:(CGSize)interItemSpacing
+{
+    if (CGSizeEqualToSize(_interItemSpacing, interItemSpacing)) return;
     
     _interItemSpacing = interItemSpacing;
+    
+    [self invalidateLayout];
+}
+
+- (void)setTitleHeight:(CGFloat)titleHeight
+{
+    if (_titleHeight == titleHeight) return;
+    
+    _titleHeight = titleHeight;
     
     [self invalidateLayout];
 }
@@ -79,9 +97,11 @@ static NSUInteger const RotationStride = 3;
 {
     self.itemInsets = UIEdgeInsetsMake(23.0f, 23.0f, 23.0f, 23.0f);
     self.itemSize = CGSizeMake(125.0f, 125.0f);
-    self.interItemSpacing = 24.0f;
+    self.interItemSpacing = CGSizeMake(24.0f, 24.0f);
+    self.titleHeight = 24.0f;
     self.numberOfColumns = 2;
     
+    // create rotations at load so that they are consistent during prepareLayout
     NSMutableArray *rotations = [NSMutableArray arrayWithCapacity:RotationCount];
     
     CGFloat percentage = 0.0f;
@@ -110,11 +130,12 @@ static NSUInteger const RotationStride = 3;
     NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
     
     CGFloat width = self.itemInsets.left +
-                    self.numberOfColumns * self.itemSize.width + (self.numberOfColumns - 1) * self.interItemSpacing +
+                    self.numberOfColumns * self.itemSize.width + (self.numberOfColumns - 1) * self.interItemSpacing.width +
                     self.itemInsets.right;
     
     CGFloat height = self.itemInsets.top +
-                     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacing +
+                     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacing.height +
+                     rowCount * self.titleHeight +
                      self.itemInsets.bottom;
     
     return CGSizeMake(width, height);
@@ -171,8 +192,8 @@ static NSUInteger const RotationStride = 3;
     NSInteger row = indexPath.section / self.numberOfColumns;
     NSInteger column = indexPath.section % self.numberOfColumns;
     
-    CGFloat originX = self.itemInsets.left + (self.itemSize.width + self.interItemSpacing) * column;
-    CGFloat originY = self.itemInsets.top + (self.itemSize.height + self.interItemSpacing) * row;
+    CGFloat originX = self.itemInsets.left + (self.itemSize.width + self.interItemSpacing.width) * column;
+    CGFloat originY = self.itemInsets.top + (self.itemSize.height + self.titleHeight + self.interItemSpacing.height) * row;
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.width);
 }
