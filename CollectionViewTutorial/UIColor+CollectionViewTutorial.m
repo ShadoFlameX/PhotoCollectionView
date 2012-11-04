@@ -15,9 +15,9 @@
     return [UIColor colorWithWhite:0.5f alpha:1.0f];
 }
 
-+ (UIColor *)albumPhotoBackgroundColor
++ (UIColor *)photoBackgroundColor
 {
-    return [UIColor colorWithRed:0.330f green:.0270 blue:0.250 alpha:1.0f];
+    return [UIColor colorWithWhite:0.85f alpha:1.0f];
 }
 
 + (UIColor *)photoBorderColor

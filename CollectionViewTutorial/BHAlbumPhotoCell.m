@@ -19,14 +19,20 @@
 
 @implementation BHAlbumPhotoCell
 
+#pragma mark - Lifecycle
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor albumPhotoBackgroundColor];
+        self.backgroundColor = [UIColor photoBackgroundColor];
         
         self.layer.borderColor = [UIColor photoBorderColor].CGColor;
         self.layer.borderWidth = 3.0f;
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowRadius = 2.0f;
+        self.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+        self.layer.shadowOpacity = 0.25f;
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -37,6 +43,13 @@
     }
 
     return self;
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.imageView.image = nil;
 }
 
 @end

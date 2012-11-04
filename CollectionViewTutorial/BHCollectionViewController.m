@@ -77,17 +77,19 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
     BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
     BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
     
-    __weak BHCollectionViewController *weakSelf = self;
-    dispatch_async(PhotoLoadQueue, ^{
-        UIImage *image = [photo image];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
-                BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
-                cell.imageView.image = image;
-            }
+    if (indexPath.row == 0) {
+        __weak BHCollectionViewController *weakSelf = self;
+        dispatch_async(PhotoLoadQueue, ^{
+            UIImage *image = [photo image];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([self.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
+                    BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
+                    cell.imageView.image = image;
+                }
+            });
         });
-    });
+    }
 
     return photoCell;
 }

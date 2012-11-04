@@ -108,6 +108,7 @@
             
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             attributes.frame = [self frameForAlbumPhotoAtIndex:indexPath];
+            attributes.zIndex = indexPath.row == 0 ? 1 : 0;
             
             [newLayoutInfo setObject:attributes forKey:indexPath];
         }

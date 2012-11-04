@@ -12,7 +12,7 @@
 
 + (UIColor *)albumBrowserBackgroundColor;
 
-+ (UIColor *)albumPhotoBackgroundColor;
++ (UIColor *)photoBackgroundColor;
 
 + (UIColor *)photoBorderColor;
 
