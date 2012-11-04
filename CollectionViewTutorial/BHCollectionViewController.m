@@ -30,6 +30,10 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     [super viewDidLoad];
     
     self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
+    self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(25.0f, 25.0f, 25.0f, 25.0f);
+    self.photoAlbumLayout.itemSize = CGSizeMake(125.0f, 125.0f);
+    
+    self.albums = [NSMutableArray array];
 
     NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Images/Photos/"];
 	
@@ -46,7 +50,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
         [self.albums addObject:album];
     }
     
-    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];
+    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];    
 }
 
 - (void)didReceiveMemoryWarning

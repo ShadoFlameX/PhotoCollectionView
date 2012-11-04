@@ -24,6 +24,18 @@
     return [self.mutablePhotos copy];
 }
 
+
+#pragma mark - Lifecycle
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.mutablePhotos = [NSMutableArray array];
+    }
+    return self;
+}
+
 #pragma mark - Photos
 
 - (void)addPhoto:(BHPhoto *)photo

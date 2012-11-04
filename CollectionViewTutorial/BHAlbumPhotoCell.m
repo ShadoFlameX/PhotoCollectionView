@@ -15,16 +15,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.backgroundColor = [UIColor albumPhotoBackgroundColor];
     }
     return self;
-}
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    
-    self.backgroundColor = [UIColor albumPhotoBackgroundColor];
 }
 
 /*
