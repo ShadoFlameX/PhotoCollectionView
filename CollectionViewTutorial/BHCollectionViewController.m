@@ -30,8 +30,6 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     [super viewDidLoad];
     
     self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
-    self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(25.0f, 25.0f, 25.0f, 25.0f);
-    self.photoAlbumLayout.itemSize = CGSizeMake(125.0f, 125.0f);
     
     self.albums = [NSMutableArray array];
 

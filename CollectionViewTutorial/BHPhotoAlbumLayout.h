@@ -12,5 +12,7 @@
 
 @property (nonatomic) UIEdgeInsets itemInsets;
 @property (nonatomic) CGSize itemSize;
+@property (nonatomic) CGFloat interItemSpacing;
+@property (nonatomic) NSInteger numberOfColumns;
 
 @end
