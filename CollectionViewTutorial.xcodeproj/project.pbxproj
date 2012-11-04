@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D6599C21646446300A7C770 /* BHAlbumTitleReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6599C11646446300A7C770 /* BHAlbumTitleReusableView.m */; };
 		0DD9B1AE1645B7AE008EE1C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD9B1AD1645B7AE008EE1C5 /* UIKit.framework */; };
 		0DD9B1B01645B7AE008EE1C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD9B1AF1645B7AE008EE1C5 /* Foundation.framework */; };
 		0DD9B1B21645B7AE008EE1C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD9B1B11645B7AE008EE1C5 /* CoreGraphics.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D6599C01646446300A7C770 /* BHAlbumTitleReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHAlbumTitleReusableView.h; sourceTree = "<group>"; };
+		0D6599C11646446300A7C770 /* BHAlbumTitleReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHAlbumTitleReusableView.m; sourceTree = "<group>"; };
 		0DD9B1A91645B7AE008EE1C5 /* CollectionViewTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD9B1AD1645B7AE008EE1C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0DD9B1AF1645B7AE008EE1C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				0DD9B1D21645B97F008EE1C5 /* BHPhotoAlbumLayout.m */,
 				0DD9B1D41645BBFA008EE1C5 /* BHAlbumPhotoCell.h */,
 				0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */,
+				0D6599C01646446300A7C770 /* BHAlbumTitleReusableView.h */,
+				0D6599C11646446300A7C770 /* BHAlbumTitleReusableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				0DD9B1DA1645BC63008EE1C5 /* UIColor+CollectionViewTutorial.m in Sources */,
 				0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */,
 				0DD9B1E11645BF26008EE1C5 /* BHAlbum.m in Sources */,
+				0D6599C21646446300A7C770 /* BHAlbumTitleReusableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +364,7 @@
 				0DD9B1CF1645B7AE008EE1C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,6 +12,7 @@
 
 @interface BHAlbum : NSObject
 
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) NSArray *photos;
 
 - (void)addPhoto:(BHPhoto *)photo;

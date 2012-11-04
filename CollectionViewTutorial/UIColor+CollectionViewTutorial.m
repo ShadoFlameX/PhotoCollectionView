@@ -12,7 +12,17 @@
 
 + (UIColor *)albumBrowserBackgroundColor
 {
-    return [UIColor colorWithWhite:0.5f alpha:1.0f];
+    return [UIColor colorWithWhite:0.25f alpha:1.0f];
+}
+
++ (UIColor *)albumTitleColor
+{
+    return [UIColor colorWithWhite:1.0f alpha:1.0f];
+}
+
++ (UIColor *)albumTitleShadowColor
+{
+    return [UIColor colorWithWhite:0.0f alpha:0.3f];
 }
 
 + (UIColor *)photoBackgroundColor

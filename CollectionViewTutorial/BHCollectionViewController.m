@@ -10,10 +10,10 @@
 #import "BHAlbum.h"
 #import "BHPhoto.h"
 #import "BHAlbumPhotoCell.h"
+#import "BHAlbumTitleReusableView.h"
 #import "BHPhotoAlbumLayout.h"
 #import "UIColor+CollectionViewTutorial.h"
 
-static NSString * const PhotoCellIdentifier = @"PhotoCell";
 static dispatch_queue_t PhotoLoadQueue = NULL;
 
 @interface BHCollectionViewController ()
@@ -36,8 +36,9 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
 
     NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Photos/"];
 	
-    for (int a=0; a<10; a++) {
+    for (int a=0; a<20; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
+        album.name = [NSString stringWithFormat:@"My Album %d",a + 1];
 
         for (int p=0; p<3; p++) {
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",1]; //TODO: load some other photos
@@ -49,7 +50,8 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
         [self.albums addObject:album];
     }
     
-    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:PhotoCellIdentifier];
+    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier];
+    [self.collectionView registerClass:[BHAlbumTitleReusableView class] forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier];
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -70,9 +72,14 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
     return ((BHAlbum *)[self.albums objectAtIndex:section]).photos.count;
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return self.albums.count;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    BHAlbumPhotoCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier forIndexPath:indexPath];
+    BHAlbumPhotoCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier forIndexPath:indexPath];
     
     BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
     BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
@@ -94,10 +101,17 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
     return photoCell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
 {
-    return self.albums.count;
+    BHAlbumTitleReusableView *titleView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier forIndexPath:indexPath];
+    
+    BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
+    
+    titleView.titleLabel.text = album.name;
+    
+    return titleView;
 }
+
 
 
 @end
