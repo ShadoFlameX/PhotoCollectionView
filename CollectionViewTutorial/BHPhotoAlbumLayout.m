@@ -81,8 +81,17 @@
 
 - (CGSize)collectionViewContentSize
 {
-    // TODO: calculate size we need for our items
-    return CGSizeMake(self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+    NSInteger rowCount = [self.collectionView numberOfSections] / 2;
+    
+    CGFloat width = self.itemInsets.left +
+                    self.numberOfColumns * self.itemSize.width + (self.numberOfColumns - 1) * self.interItemSpacing +
+                    self.itemInsets.right;
+    
+    CGFloat height = self.itemInsets.top +
+                     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacing +
+                     self.itemInsets.bottom;
+    
+    return CGSizeMake(width, height);
 }
 
 - (void)prepareLayout
