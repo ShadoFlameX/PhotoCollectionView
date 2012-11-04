@@ -15,6 +15,7 @@
 #import "UIColor+CollectionViewTutorial.h"
 
 static dispatch_queue_t PhotoLoadQueue = NULL;
+static NSInteger const PhotoCount = 20;
 
 @interface BHCollectionViewController ()
 
@@ -36,15 +37,18 @@ static dispatch_queue_t PhotoLoadQueue = NULL;
 
     NSURL *urlPrefix = [NSURL URLWithString:@"https://raw.github.com/ShadoFlameX/PhotoCollectionView/master/Photos/"];
 	
+    NSInteger photoIndex = 0;
+    
     for (int a=0; a<20; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"My Album %d",a + 1];
 
         for (int p=0; p<3; p++) {
-            NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",1]; //TODO: load some other photos
-            
+            NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % PhotoCount];
             BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
             [album addPhoto:photo];
+            
+            photoIndex++;
         }
         
         [self.albums addObject:album];
