@@ -14,12 +14,12 @@
 #import "BHPhotoAlbumLayout.h"
 #import "UIColor+CollectionViewTutorial.h"
 
-static dispatch_queue_t PhotoLoadQueue = NULL;
 static NSInteger const PhotoCount = 25;
 
 @interface BHCollectionViewController ()
 
 @property (nonatomic, strong) IBOutlet BHPhotoAlbumLayout *photoAlbumLayout;
+@property (nonatomic, strong) NSOperationQueue *thumbnailQueue;
 
 @end
 
@@ -43,7 +43,7 @@ static NSInteger const PhotoCount = 25;
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"Photo Album %d",a + 1];
 
-        for (int p=0; p<arc4random()%5 + 1; p++) {
+        for (int p=0; p<arc4random()%4 + 2; p++) {
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % PhotoCount];
             BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
             [album addPhoto:photo];
@@ -57,10 +57,8 @@ static NSInteger const PhotoCount = 25;
     [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier];
     [self.collectionView registerClass:[BHAlbumTitleReusableView class] forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier];
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        PhotoLoadQueue = dispatch_queue_create("com.skeuo.photo_load_queue", DISPATCH_QUEUE_SERIAL);
-    });
+    self.thumbnailQueue = [[NSOperationQueue alloc] init];
+    self.thumbnailQueue.maxConcurrentOperationCount = 3;
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,19 +85,22 @@ static NSInteger const PhotoCount = 25;
     BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
     BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
     
-    if (indexPath.row == 0) {
-        __weak BHCollectionViewController *weakSelf = self;
-        dispatch_async(PhotoLoadQueue, ^{
-            UIImage *image = [photo image];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([self.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
-                    BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
-                    cell.imageView.image = image;
-                }
-            });
+    __weak BHCollectionViewController *weakSelf = self;
+    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+        UIImage *image = [photo image];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([weakSelf.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
+                BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
+                cell.imageView.image = image;
+            }
         });
-    }
+    }];
+    
+    operation.queuePriority = (indexPath.row == 0) ?
+        NSOperationQueuePriorityHigh : NSOperationQueuePriorityNormal;
+    
+    [self.thumbnailQueue addOperation:operation];
 
     return photoCell;
 }
