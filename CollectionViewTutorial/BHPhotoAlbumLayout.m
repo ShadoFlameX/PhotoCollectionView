@@ -182,7 +182,7 @@ static NSUInteger const RotationStride = 3;
             
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             itemAttributes.frame = [self frameForAlbumPhotoAtIndexPath:indexPath];
-            itemAttributes.zIndex = PhotoCellBaseZIndex + itemCount - indexPath.row;
+            itemAttributes.zIndex = PhotoCellBaseZIndex + itemCount - item;
             itemAttributes.transform3D = [self transformForAlbumPhotoAtIndex:indexPath];
             
             [cellLayoutInfo setObject:itemAttributes forKey:indexPath];
