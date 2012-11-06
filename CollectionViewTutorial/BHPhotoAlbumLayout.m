@@ -147,6 +147,17 @@ static NSUInteger const RotationStride = 3;
     return CGSizeMake(self.collectionView.bounds.size.width, height);
 }
 
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
+{
+    if (self.collectionView.bounds.size.width != newBounds.size.width ||
+        self.collectionView.bounds.size.height != newBounds.size.height) {
+        return YES;
+        
+    } else {
+        return NO;
+    }
+}
+
 - (void)prepareLayout
 {
     NSMutableDictionary *newLayoutInfo = [NSMutableDictionary dictionary];
@@ -234,6 +245,8 @@ static NSUInteger const RotationStride = 3;
                       self.itemInsets.left -
                       self.itemInsets.right -
                       (self.numberOfColumns * self.itemSize.width);
+    
+    if (self.numberOfColumns > 1) spacing = spacing / (self.numberOfColumns - 1);
     
     CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacing) * column);
     

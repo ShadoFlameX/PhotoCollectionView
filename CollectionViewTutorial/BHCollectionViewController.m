@@ -66,6 +66,22 @@ static NSInteger const PhotoCount = 25;
     [super didReceiveMemoryWarning];
 }
 
+
+#pragma mark - View Rotation
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.photoAlbumLayout.numberOfColumns = 3;
+        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, 45.0f, 13.0f, 45.0f);
+        
+    } else {
+        self.photoAlbumLayout.numberOfColumns = 2;
+        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
+    }
+}
+
+
 #pragma mark - UICollectionViewDataSource methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
