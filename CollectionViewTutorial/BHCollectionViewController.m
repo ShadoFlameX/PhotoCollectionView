@@ -15,7 +15,7 @@
 #import "UIColor+CollectionViewTutorial.h"
 
 static dispatch_queue_t PhotoLoadQueue = NULL;
-static NSInteger const PhotoCount = 20;
+static NSInteger const PhotoCount = 25;
 
 @interface BHCollectionViewController ()
 
@@ -39,7 +39,7 @@ static NSInteger const PhotoCount = 20;
 	
     NSInteger photoIndex = 0;
     
-    for (int a=0; a<16; a++) {
+    for (int a=0; a<12; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"My Album %d",a + 1];
 
