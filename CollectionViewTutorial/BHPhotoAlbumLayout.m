@@ -101,8 +101,8 @@ static NSUInteger const RotationStride = 3;
 {
     self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
     self.itemSize = CGSizeMake(125.0f, 125.0f);
-    self.interItemSpacingY = 14.0f;
-    self.titleHeight = 30.0f;
+    self.interItemSpacingY = 12.0f;
+    self.titleHeight = 26.0f;
     self.numberOfColumns = 2;
     
     // create rotations at load so that they are consistent during prepareLayout

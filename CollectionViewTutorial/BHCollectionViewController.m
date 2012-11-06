@@ -31,7 +31,7 @@ static NSInteger const PhotoCount = 20;
 {
     [super viewDidLoad];
     
-    self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"concrete_wall"]];
     
     self.albums = [NSMutableArray array];
 
@@ -39,11 +39,11 @@ static NSInteger const PhotoCount = 20;
 	
     NSInteger photoIndex = 0;
     
-    for (int a=0; a<20; a++) {
+    for (int a=0; a<16; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"My Album %d",a + 1];
 
-        for (int p=0; p<3; p++) {
+        for (int p=0; p<arc4random()%5 + 1; p++) {
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % PhotoCount];
             BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
             [album addPhoto:photo];
