@@ -7,6 +7,7 @@
 //
 
 #import "BHPhotoAlbumLayout.h"
+#import "BHEmblemView.h"
 
 static NSUInteger const AlbumTitleZIndex = 0;
 static NSUInteger const PhotoCellBaseZIndex = 100;
@@ -22,6 +23,7 @@ static NSUInteger const RotationStride = 3;
 - (CGRect)frameForAlbumPhotoAtIndexPath:(NSIndexPath *)indexPath;
 - (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath;
 - (CGRect)frameForAlbumTitleAtIndexPath:(NSIndexPath *)indexPath;
+- (CGRect)frameForEmblem;
 
 @end
 
@@ -124,6 +126,8 @@ static NSUInteger const RotationStride = 3;
     }
     
     self.rotations = rotations;
+    
+    [self registerClass:[BHEmblemView class] forDecorationViewOfKind:BHPhotoEmblemIdentifier];
 }
 
 
@@ -151,11 +155,19 @@ static NSUInteger const RotationStride = 3;
     
     NSInteger sectionCount = [self.collectionView numberOfSections];
     
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+
+    UICollectionViewLayoutAttributes *emblemAttributes = [UICollectionViewLayoutAttributes
+        layoutAttributesForDecorationViewOfKind:BHPhotoEmblemIdentifier withIndexPath:indexPath];
+    emblemAttributes.frame = [self frameForEmblem];
+
+    [newLayoutInfo setObject:@{indexPath: emblemAttributes} forKey:BHPhotoEmblemIdentifier];
+
     for (int section=0; section<sectionCount; section++) {
         NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
 
         for (int item=0; item<itemCount; item++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             itemAttributes.frame = [self frameForAlbumPhotoAtIndexPath:indexPath];
@@ -205,6 +217,11 @@ static NSUInteger const RotationStride = 3;
     return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutAlbumTitleIdentifier] objectForKey:indexPath];
 }
 
+- (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString*)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
+{
+    return [[self.layoutInfo objectForKey:BHPhotoEmblemIdentifier] objectForKey:indexPath];
+}
+
 
 #pragma mark - Private
 
@@ -232,6 +249,16 @@ static NSUInteger const RotationStride = 3;
     frame.size.height = self.titleHeight;
     
     return frame;
+}
+
+- (CGRect)frameForEmblem
+{
+    CGSize size = [BHEmblemView defaultSize];
+    
+    CGFloat originX = floorf((self.collectionView.bounds.size.width - size.width) * 0.5f);
+    CGFloat originY = -size.height - 30.0f;
+    
+    return CGRectMake(originX, originY, size.width, size.height);
 }
 
 - (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath

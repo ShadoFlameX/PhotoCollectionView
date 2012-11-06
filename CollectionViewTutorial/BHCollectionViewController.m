@@ -66,7 +66,6 @@ static NSInteger const PhotoCount = 20;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UICollectionViewDataSource methods
@@ -115,7 +114,5 @@ static NSInteger const PhotoCount = 20;
     
     return titleView;
 }
-
-
 
 @end

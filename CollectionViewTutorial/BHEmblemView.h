@@ -1,5 +1,5 @@
 //
-//  BHReusableImageView.h
+//  BHEmblemView.h
 //  CollectionViewTutorial
 //
 //  Created by Bryan Hansen on 11/6/12.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BHReusableImageView : UICollectionReusableView
+@interface BHEmblemView : UICollectionReusableView
 
 @property (nonatomic, strong, readonly) UIImageView *imageView;
+
++ (CGSize)defaultSize;
 
 @end

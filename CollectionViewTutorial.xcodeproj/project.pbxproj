@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D27363D164908EB00180485 /* BHReusableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D27363C164908EB00180485 /* BHReusableImageView.m */; };
+		0D27363D164908EB00180485 /* BHEmblemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D27363C164908EB00180485 /* BHEmblemView.m */; };
+		0D27364016490E6F00180485 /* emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D27363E16490E6F00180485 /* emblem.png */; };
+		0D27364116490E6F00180485 /* emblem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D27363F16490E6F00180485 /* emblem@2x.png */; };
 		0D4F141716466A4D0015AD5E /* concrete_wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4F141516466A4D0015AD5E /* concrete_wall.png */; };
 		0D4F141816466A4D0015AD5E /* concrete_wall@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4F141616466A4D0015AD5E /* concrete_wall@2X.png */; };
 		0D6599C21646446300A7C770 /* BHAlbumTitleReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6599C11646446300A7C770 /* BHAlbumTitleReusableView.m */; };
@@ -31,8 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D27363B164908EB00180485 /* BHReusableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHReusableImageView.h; sourceTree = "<group>"; };
-		0D27363C164908EB00180485 /* BHReusableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHReusableImageView.m; sourceTree = "<group>"; };
+		0D27363B164908EB00180485 /* BHEmblemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHEmblemView.h; sourceTree = "<group>"; };
+		0D27363C164908EB00180485 /* BHEmblemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHEmblemView.m; sourceTree = "<group>"; };
+		0D27363E16490E6F00180485 /* emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emblem.png; path = Images/emblem.png; sourceTree = SOURCE_ROOT; };
+		0D27363F16490E6F00180485 /* emblem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emblem@2x.png"; path = "Images/emblem@2x.png"; sourceTree = SOURCE_ROOT; };
 		0D4F141516466A4D0015AD5E /* concrete_wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = concrete_wall.png; path = Images/concrete_wall.png; sourceTree = SOURCE_ROOT; };
 		0D4F141616466A4D0015AD5E /* concrete_wall@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "concrete_wall@2X.png"; path = "Images/concrete_wall@2X.png"; sourceTree = SOURCE_ROOT; };
 		0D6599C01646446300A7C770 /* BHAlbumTitleReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHAlbumTitleReusableView.h; sourceTree = "<group>"; };
@@ -149,8 +153,8 @@
 				0DD9B1D51645BBFA008EE1C5 /* BHAlbumPhotoCell.m */,
 				0D6599C01646446300A7C770 /* BHAlbumTitleReusableView.h */,
 				0D6599C11646446300A7C770 /* BHAlbumTitleReusableView.m */,
-				0D27363B164908EB00180485 /* BHReusableImageView.h */,
-				0D27363C164908EB00180485 /* BHReusableImageView.m */,
+				0D27363B164908EB00180485 /* BHEmblemView.h */,
+				0D27363C164908EB00180485 /* BHEmblemView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -178,6 +182,8 @@
 		0DD9B1E41645C16C008EE1C5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0D27363E16490E6F00180485 /* emblem.png */,
+				0D27363F16490E6F00180485 /* emblem@2x.png */,
 				0D4F141516466A4D0015AD5E /* concrete_wall.png */,
 				0D4F141616466A4D0015AD5E /* concrete_wall@2X.png */,
 			);
@@ -243,6 +249,8 @@
 				0DD9B1CA1645B7AE008EE1C5 /* BHCollectionViewController.xib in Resources */,
 				0D4F141716466A4D0015AD5E /* concrete_wall.png in Resources */,
 				0D4F141816466A4D0015AD5E /* concrete_wall@2X.png in Resources */,
+				0D27364016490E6F00180485 /* emblem.png in Resources */,
+				0D27364116490E6F00180485 /* emblem@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +270,7 @@
 				0DD9B1DE1645BDE0008EE1C5 /* BHPhoto.m in Sources */,
 				0DD9B1E11645BF26008EE1C5 /* BHAlbum.m in Sources */,
 				0D6599C21646446300A7C770 /* BHAlbumTitleReusableView.m in Sources */,
-				0D27363D164908EB00180485 /* BHReusableImageView.m in Sources */,
+				0D27363D164908EB00180485 /* BHEmblemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

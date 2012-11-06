@@ -10,6 +10,7 @@
 
 static NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier = @"PhotoCell";
 static NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier = @"AlbumTitle";
+static NSString * const BHPhotoEmblemIdentifier = @"Emblem";
 
 @interface BHPhotoAlbumLayout : UICollectionViewLayout
 
