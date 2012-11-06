@@ -41,7 +41,7 @@ static NSInteger const PhotoCount = 25;
     
     for (int a=0; a<12; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
-        album.name = [NSString stringWithFormat:@"My Album %d",a + 1];
+        album.name = [NSString stringWithFormat:@"Photo Album %d",a + 1];
 
         for (int p=0; p<arc4random()%5 + 1; p++) {
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % PhotoCount];
