@@ -73,7 +73,12 @@ static NSInteger const PhotoCount = 25;
 {
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         self.photoAlbumLayout.numberOfColumns = 3;
-        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, 45.0f, 13.0f, 45.0f);
+        
+        // handle insets for iPhone 4 or 5 
+        CGFloat sideInset = [UIScreen mainScreen].preferredMode.size.width == 1136.0f ?
+                            45.0f : 25.0f;
+        
+        self.photoAlbumLayout.itemInsets = UIEdgeInsetsMake(22.0f, sideInset, 13.0f, sideInset);
         
     } else {
         self.photoAlbumLayout.numberOfColumns = 2;
