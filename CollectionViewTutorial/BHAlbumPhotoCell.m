@@ -33,6 +33,7 @@
         self.layer.shadowRadius = 3.0f;
         self.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
         self.layer.shadowOpacity = 0.5f;
+        // make sure we rasterize nicely for retina
         self.layer.rasterizationScale = [UIScreen mainScreen].scale;
         self.layer.shouldRasterize = YES;
         
@@ -40,7 +41,7 @@
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
         
-        [self addSubview:self.imageView];
+        [self.contentView addSubview:self.imageView];
     }
 
     return self;

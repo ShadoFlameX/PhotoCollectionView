@@ -9,9 +9,11 @@
 #import "BHPhotoAlbumLayout.h"
 #import "BHEmblemView.h"
 
-static NSUInteger const AlbumTitleZIndex = 0;
-static NSUInteger const PhotoCellBaseZIndex = 100;
+NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier = @"PhotoCell";
+NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier = @"AlbumTitle";
+NSString * const BHPhotoEmblemIdentifier = @"Emblem";
 
+static NSUInteger const PhotoCellBaseZIndex = 100;
 static NSUInteger const RotationCount = 32;
 static NSUInteger const RotationStride = 3;
 
@@ -21,9 +23,9 @@ static NSUInteger const RotationStride = 3;
 @property (nonatomic, strong) NSArray *rotations;
 
 - (CGRect)frameForAlbumPhotoAtIndexPath:(NSIndexPath *)indexPath;
-- (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath;
 - (CGRect)frameForAlbumTitleAtIndexPath:(NSIndexPath *)indexPath;
 - (CGRect)frameForEmblem;
+- (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath;
 
 @end
 
@@ -58,20 +60,20 @@ static NSUInteger const RotationStride = 3;
     [self invalidateLayout];
 }
 
-- (void)setTitleHeight:(CGFloat)titleHeight
-{
-    if (_titleHeight == titleHeight) return;
-    
-    _titleHeight = titleHeight;
-    
-    [self invalidateLayout];
-}
-
 - (void)setNumberOfColumns:(NSInteger)numberOfColumns
 {
     if (_numberOfColumns == numberOfColumns) return;
     
     _numberOfColumns = numberOfColumns;
+    
+    [self invalidateLayout];
+}
+
+- (void)setTitleHeight:(CGFloat)titleHeight
+{
+    if (_titleHeight == titleHeight) return;
+    
+    _titleHeight = titleHeight;
     
     [self invalidateLayout];
 }
@@ -104,8 +106,8 @@ static NSUInteger const RotationStride = 3;
     self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
     self.itemSize = CGSizeMake(125.0f, 125.0f);
     self.interItemSpacingY = 12.0f;
-    self.titleHeight = 26.0f;
     self.numberOfColumns = 2;
+    self.titleHeight = 26.0f;
     
     // create rotations at load so that they are consistent during prepareLayout
     NSMutableArray *rotations = [NSMutableArray arrayWithCapacity:RotationCount];
@@ -115,8 +117,8 @@ static NSUInteger const RotationStride = 3;
         // ensure that each angle is different enough to be seen
         CGFloat newPercentage = 0.0f;
         do {
-            newPercentage = ((CGFloat)(arc4random() % 200) - 100) * 0.0001f;
-        } while (fabsf(percentage - newPercentage) < 0.008);
+            newPercentage = ((CGFloat)(arc4random() % 220) - 110) * 0.0001f;
+        } while (fabsf(percentage - newPercentage) < 0.006);
         percentage = newPercentage;
         
         CGFloat angle = 2 * M_PI * (1.0f + percentage);
@@ -133,31 +135,6 @@ static NSUInteger const RotationStride = 3;
 
 #pragma mark - Layout
 
-- (CGSize)collectionViewContentSize
-{
-    NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
-    // make sure we count a row if we only have 1 section
-    if ([self.collectionView numberOfSections] == 1) rowCount = 1;
-
-    CGFloat height = self.itemInsets.top +
-                     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacingY +
-                     rowCount * self.titleHeight +
-                     self.itemInsets.bottom;
-    
-    return CGSizeMake(self.collectionView.bounds.size.width, height);
-}
-
--(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
-{
-    if (self.collectionView.bounds.size.width != newBounds.size.width ||
-        self.collectionView.bounds.size.height != newBounds.size.height) {
-        return YES;
-        
-    } else {
-        return NO;
-    }
-}
-
 - (void)prepareLayout
 {
     NSMutableDictionary *newLayoutInfo = [NSMutableDictionary dictionary];
@@ -165,32 +142,32 @@ static NSUInteger const RotationStride = 3;
     NSMutableDictionary *titleLayoutInfo = [NSMutableDictionary dictionary];
     
     NSInteger sectionCount = [self.collectionView numberOfSections];
-    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-
+    
     UICollectionViewLayoutAttributes *emblemAttributes = [UICollectionViewLayoutAttributes
-        layoutAttributesForDecorationViewOfKind:BHPhotoEmblemIdentifier withIndexPath:indexPath];
+                                                          layoutAttributesForDecorationViewOfKind:BHPhotoEmblemIdentifier withIndexPath:indexPath];
     emblemAttributes.frame = [self frameForEmblem];
-
+    
     [newLayoutInfo setObject:@{indexPath: emblemAttributes} forKey:BHPhotoEmblemIdentifier];
-
-    for (int section=0; section<sectionCount; section++) {
+    
+    for (int section = 0; section < sectionCount; section++) {
         NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
-
-        for (int item=0; item<itemCount; item++) {
+        
+        for (int item = 0; item < itemCount; item++) {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
-            UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *itemAttributes =
+                [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             itemAttributes.frame = [self frameForAlbumPhotoAtIndexPath:indexPath];
-            itemAttributes.zIndex = PhotoCellBaseZIndex + itemCount - item;
             itemAttributes.transform3D = [self transformForAlbumPhotoAtIndex:indexPath];
+            itemAttributes.zIndex = PhotoCellBaseZIndex + itemCount - item;
             
             [cellLayoutInfo setObject:itemAttributes forKey:indexPath];
             
             if (indexPath.item == 0) {
-                UICollectionViewLayoutAttributes *titleAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withIndexPath:indexPath];
+                UICollectionViewLayoutAttributes *titleAttributes =
+                    [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withIndexPath:indexPath];
                 titleAttributes.frame = [self frameForAlbumTitleAtIndexPath:indexPath];
-                titleAttributes.zIndex = AlbumTitleZIndex;
                 
                 [titleLayoutInfo setObject:titleAttributes forKey:indexPath];
             }
@@ -201,6 +178,20 @@ static NSUInteger const RotationStride = 3;
     [newLayoutInfo setObject:titleLayoutInfo forKey:BHPhotoAlbumLayoutAlbumTitleIdentifier];
     
     self.layoutInfo = newLayoutInfo;
+}
+
+- (CGSize)collectionViewContentSize
+{
+    NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
+    // make sure we count another row if one is only partially filled
+    if ([self.collectionView numberOfSections] % self.numberOfColumns) rowCount++;
+
+    CGFloat height = self.itemInsets.top +
+                     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacingY +
+                     rowCount * self.titleHeight +
+                     self.itemInsets.bottom;
+    
+    return CGSizeMake(self.collectionView.bounds.size.width, height);
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -220,10 +211,12 @@ static NSUInteger const RotationStride = 3;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutPhotoCellIdentifier] objectForKey:indexPath];
+    return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutPhotoCellIdentifier]
+            objectForKey:indexPath];
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind
+                                                                     atIndexPath:(NSIndexPath *)indexPath
 {
     return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutAlbumTitleIdentifier] objectForKey:indexPath];
 }
@@ -241,16 +234,17 @@ static NSUInteger const RotationStride = 3;
     NSInteger row = indexPath.section / self.numberOfColumns;
     NSInteger column = indexPath.section % self.numberOfColumns;
     
-    CGFloat spacing = self.collectionView.bounds.size.width -
-                      self.itemInsets.left -
-                      self.itemInsets.right -
-                      (self.numberOfColumns * self.itemSize.width);
+    CGFloat horzSpacing = self.collectionView.bounds.size.width -
+                          self.itemInsets.left -
+                          self.itemInsets.right -
+                          (self.numberOfColumns * self.itemSize.width);
     
-    if (self.numberOfColumns > 1) spacing = spacing / (self.numberOfColumns - 1);
+    if (self.numberOfColumns > 1) horzSpacing = horzSpacing / (self.numberOfColumns - 1);
     
-    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacing) * column);
+    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + horzSpacing) * column);
     
-    CGFloat originY = self.itemInsets.top + (self.itemSize.height + self.titleHeight + self.interItemSpacingY) * row;
+    CGFloat originY = floor(self.itemInsets.top +
+                      (self.itemSize.height + self.titleHeight + self.interItemSpacingY) * row);
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.width);
 }
@@ -276,7 +270,8 @@ static NSUInteger const RotationStride = 3;
 
 - (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath
 {
-    return [[self.rotations objectAtIndex:(indexPath.section * RotationStride + indexPath.row) % RotationCount] CATransform3DValue];
+    NSInteger offset = (indexPath.section * RotationStride + indexPath.item);
+    return [[self.rotations objectAtIndex:offset % RotationCount] CATransform3DValue];
 }
 
 @end

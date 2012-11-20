@@ -10,6 +10,4 @@
 
 @interface BHCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *albums;
-
 @end

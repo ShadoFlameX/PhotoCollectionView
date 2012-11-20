@@ -10,6 +10,6 @@
 
 @interface BHAlbumTitleReusableView : UICollectionReusableView
 
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 @end

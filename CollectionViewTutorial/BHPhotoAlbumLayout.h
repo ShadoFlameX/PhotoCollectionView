@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-static NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier = @"PhotoCell";
-static NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier = @"AlbumTitle";
-static NSString * const BHPhotoEmblemIdentifier = @"Emblem";
+FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier;
+FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier;
 
 @interface BHPhotoAlbumLayout : UICollectionViewLayout
 
 @property (nonatomic) UIEdgeInsets itemInsets;
 @property (nonatomic) CGSize itemSize;
 @property (nonatomic) CGFloat interItemSpacingY;
-@property (nonatomic) CGFloat titleHeight;
 @property (nonatomic) NSInteger numberOfColumns;
+@property (nonatomic) CGFloat titleHeight;
 
 @end

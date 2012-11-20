@@ -12,17 +12,7 @@
 
 + (UIColor *)albumBrowserBackgroundColor
 {
-    return [UIColor colorWithWhite:0.25f alpha:1.0f];
-}
-
-+ (UIColor *)albumTitleColor
-{
-    return [UIColor colorWithWhite:1.0f alpha:1.0f];
-}
-
-+ (UIColor *)albumTitleShadowColor
-{
-    return [UIColor colorWithWhite:0.0f alpha:0.3f];
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"concrete_wall"]];
 }
 
 + (UIColor *)photoBackgroundColor
@@ -33,6 +23,16 @@
 + (UIColor *)photoBorderColor
 {
     return [UIColor whiteColor];
+}
+
++ (UIColor *)albumTitleColor
+{
+    return [UIColor colorWithWhite:1.0f alpha:1.0f];
+}
+
++ (UIColor *)albumTitleShadowColor
+{
+    return [UIColor colorWithWhite:0.0f alpha:0.3f];
 }
 
 @end

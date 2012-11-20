@@ -7,17 +7,18 @@
 //
 
 #import "BHCollectionViewController.h"
+#import "BHAlbumPhotoCell.h"
+#import "BHPhotoAlbumLayout.h"
 #import "BHAlbum.h"
 #import "BHPhoto.h"
-#import "BHAlbumPhotoCell.h"
 #import "BHAlbumTitleReusableView.h"
-#import "BHPhotoAlbumLayout.h"
 #import "UIColor+CollectionViewTutorial.h"
 
 static NSInteger const PhotoCount = 25;
 
 @interface BHCollectionViewController ()
 
+@property (nonatomic, strong) NSMutableArray *albums;
 @property (nonatomic, strong) IBOutlet BHPhotoAlbumLayout *photoAlbumLayout;
 @property (nonatomic, strong) NSOperationQueue *thumbnailQueue;
 
@@ -31,7 +32,7 @@ static NSInteger const PhotoCount = 25;
 {
     [super viewDidLoad];
     
-    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"concrete_wall"]];
+    self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
     
     self.albums = [NSMutableArray array];
 
@@ -39,13 +40,16 @@ static NSInteger const PhotoCount = 25;
 	
     NSInteger photoIndex = 0;
     
-    for (int a=0; a<12; a++) {
+    for (int a = 0; a < 12; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"Photo Album %d",a + 1];
-
-        for (int p=0; p<arc4random()%4 + 2; p++) {
-            NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % PhotoCount];
-            BHPhoto *photo = [BHPhoto photoWithImageURL:[urlPrefix URLByAppendingPathComponent:photoFilename]];
+        
+        int photoCount = arc4random()%4 + 2;
+        for (int p = 0; p < photoCount; p++) {
+            // there are up to 25 photos available to load from the code repository
+            NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % 25];
+            NSURL *photoURL = [urlPrefix URLByAppendingPathComponent:photoFilename];
+            BHPhoto *photo = [BHPhoto photoWithImageURL:photoURL];
             [album addPhoto:photo];
             
             photoIndex++;
@@ -54,8 +58,11 @@ static NSInteger const PhotoCount = 25;
         [self.albums addObject:album];
     }
     
-    [self.collectionView registerClass:[BHAlbumPhotoCell class] forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier];
-    [self.collectionView registerClass:[BHAlbumTitleReusableView class] forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier];
+    [self.collectionView registerClass:[BHAlbumPhotoCell class]
+            forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier];
+    [self.collectionView registerClass:[BHAlbumTitleReusableView class]
+            forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier
+                   withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier];
     
     self.thumbnailQueue = [[NSOperationQueue alloc] init];
     self.thumbnailQueue.maxConcurrentOperationCount = 3;
@@ -64,17 +71,19 @@ static NSInteger const PhotoCount = 25;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
 #pragma mark - View Rotation
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration
 {
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
         self.photoAlbumLayout.numberOfColumns = 3;
         
-        // handle insets for iPhone 4 or 5 
+        // handle insets for iPhone 4 or 5
         CGFloat sideInset = [UIScreen mainScreen].preferredMode.size.width == 1136.0f ?
                             45.0f : 25.0f;
         
@@ -86,39 +95,44 @@ static NSInteger const PhotoCount = 25;
     }
 }
 
-
-#pragma mark - UICollectionViewDataSource methods
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return ((BHAlbum *)[self.albums objectAtIndex:section]).photos.count;
-}
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return self.albums.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    BHAlbumPhotoCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier forIndexPath:indexPath];
+    return ((BHAlbum *)[self.albums objectAtIndex:section]).photos.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    BHAlbumPhotoCell *photoCell =
+        [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier
+                                                  forIndexPath:indexPath];
     
     BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
     BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
     
+    // load photo images in the background
     __weak BHCollectionViewController *weakSelf = self;
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
         UIImage *image = [photo image];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            // then set them via the main queue if the cell is still visible.
             if ([weakSelf.collectionView.indexPathsForVisibleItems containsObject:indexPath]) {
-                BHAlbumPhotoCell *cell = (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
+                BHAlbumPhotoCell *cell =
+                    (BHAlbumPhotoCell *)[weakSelf.collectionView cellForItemAtIndexPath:indexPath];
                 cell.imageView.image = image;
             }
         });
     }];
     
-    operation.queuePriority = (indexPath.row == 0) ?
+    operation.queuePriority = (indexPath.item == 0) ?
         NSOperationQueuePriorityHigh : NSOperationQueuePriorityNormal;
     
     [self.thumbnailQueue addOperation:operation];
@@ -126,9 +140,14 @@ static NSInteger const PhotoCount = 25;
     return photoCell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath;
 {
-    BHAlbumTitleReusableView *titleView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier forIndexPath:indexPath];
+    BHAlbumTitleReusableView *titleView =
+        [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                           withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier
+                                                  forIndexPath:indexPath];
     
     BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
     

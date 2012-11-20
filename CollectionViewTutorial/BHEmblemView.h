@@ -10,8 +10,6 @@
 
 @interface BHEmblemView : UICollectionReusableView
 
-@property (nonatomic, strong, readonly) UIImageView *imageView;
-
 + (CGSize)defaultSize;
 
 @end
