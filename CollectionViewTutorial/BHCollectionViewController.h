@@ -1,5 +1,5 @@
 //
-//  BHViewController.h
+//  BHCollectionViewController.h
 //  CollectionViewTutorial
 //
 //  Created by Bryan Hansen on 11/3/12.

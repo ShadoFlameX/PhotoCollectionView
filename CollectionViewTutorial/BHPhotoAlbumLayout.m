@@ -9,9 +9,9 @@
 #import "BHPhotoAlbumLayout.h"
 #import "BHEmblemView.h"
 
-NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier = @"PhotoCell";
-NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier = @"AlbumTitle";
-NSString * const BHPhotoEmblemIdentifier = @"Emblem";
+NSString * const BHPhotoAlbumLayoutPhotoCellKind = @"PhotoCell";
+NSString * const BHPhotoAlbumLayoutAlbumTitleKind = @"AlbumTitle";
+NSString * const BHPhotoEmblemKind = @"Emblem";
 
 static NSUInteger const PhotoCellBaseZIndex = 100;
 static NSUInteger const RotationCount = 32;
@@ -113,7 +113,7 @@ static NSUInteger const RotationStride = 3;
     NSMutableArray *rotations = [NSMutableArray arrayWithCapacity:RotationCount];
     
     CGFloat percentage = 0.0f;
-    for (NSUInteger i=0; i<RotationCount; i++) {
+    for (NSInteger i = 0; i < RotationCount; i++) {
         // ensure that each angle is different enough to be seen
         CGFloat newPercentage = 0.0f;
         do {
@@ -129,7 +129,7 @@ static NSUInteger const RotationStride = 3;
     
     self.rotations = rotations;
     
-    [self registerClass:[BHEmblemView class] forDecorationViewOfKind:BHPhotoEmblemIdentifier];
+    [self registerClass:[BHEmblemView class] forDecorationViewOfKind:BHPhotoEmblemKind];
 }
 
 
@@ -145,15 +145,15 @@ static NSUInteger const RotationStride = 3;
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     
     UICollectionViewLayoutAttributes *emblemAttributes = [UICollectionViewLayoutAttributes
-                                                          layoutAttributesForDecorationViewOfKind:BHPhotoEmblemIdentifier withIndexPath:indexPath];
+                                                          layoutAttributesForDecorationViewOfKind:BHPhotoEmblemKind withIndexPath:indexPath];
     emblemAttributes.frame = [self frameForEmblem];
     
-    [newLayoutInfo setObject:@{indexPath: emblemAttributes} forKey:BHPhotoEmblemIdentifier];
+    newLayoutInfo[BHPhotoEmblemKind] = @{indexPath: emblemAttributes};
     
-    for (NSUInteger section = 0; section < sectionCount; section++) {
+    for (NSInteger section = 0; section < sectionCount; section++) {
         NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
         
-        for (NSUInteger item = 0; item < itemCount; item++) {
+        for (NSInteger item = 0; item < itemCount; item++) {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes =
@@ -162,20 +162,20 @@ static NSUInteger const RotationStride = 3;
             itemAttributes.transform3D = [self transformForAlbumPhotoAtIndex:indexPath];
             itemAttributes.zIndex = PhotoCellBaseZIndex + itemCount - item;
             
-            [cellLayoutInfo setObject:itemAttributes forKey:indexPath];
+            cellLayoutInfo[indexPath] = itemAttributes;
             
             if (indexPath.item == 0) {
                 UICollectionViewLayoutAttributes *titleAttributes =
-                    [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier withIndexPath:indexPath];
+                    [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleKind withIndexPath:indexPath];
                 titleAttributes.frame = [self frameForAlbumTitleAtIndexPath:indexPath];
                 
-                [titleLayoutInfo setObject:titleAttributes forKey:indexPath];
+                titleLayoutInfo[indexPath] = titleAttributes;
             }
         }
     }
     
-    [newLayoutInfo setObject:cellLayoutInfo forKey:BHPhotoAlbumLayoutPhotoCellIdentifier];
-    [newLayoutInfo setObject:titleLayoutInfo forKey:BHPhotoAlbumLayoutAlbumTitleIdentifier];
+    newLayoutInfo[BHPhotoAlbumLayoutPhotoCellKind] = cellLayoutInfo;
+    newLayoutInfo[BHPhotoAlbumLayoutAlbumTitleKind] = titleLayoutInfo;
     
     self.layoutInfo = newLayoutInfo;
 }
@@ -211,19 +211,18 @@ static NSUInteger const RotationStride = 3;
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutPhotoCellIdentifier]
-            objectForKey:indexPath];
+    return self.layoutInfo[BHPhotoAlbumLayoutPhotoCellKind][indexPath];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind
                                                                      atIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self.layoutInfo objectForKey:BHPhotoAlbumLayoutAlbumTitleIdentifier] objectForKey:indexPath];
+    return self.layoutInfo[BHPhotoAlbumLayoutAlbumTitleKind][indexPath];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString*)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
 {
-    return [[self.layoutInfo objectForKey:BHPhotoEmblemIdentifier] objectForKey:indexPath];
+    return self.layoutInfo[BHPhotoEmblemKind][indexPath];
 }
 
 

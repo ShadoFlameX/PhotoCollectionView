@@ -1,5 +1,5 @@
 //
-//  BHViewController.m
+//  BHCollectionViewController.m
 //  CollectionViewTutorial
 //
 //  Created by Bryan Hansen on 11/3/12.
@@ -19,7 +19,7 @@ static NSInteger const PhotoCount = 25;
 @interface BHCollectionViewController ()
 
 @property (nonatomic, strong) NSMutableArray *albums;
-@property (nonatomic, strong) IBOutlet BHPhotoAlbumLayout *photoAlbumLayout;
+@property (nonatomic, weak) IBOutlet BHPhotoAlbumLayout *photoAlbumLayout;
 @property (nonatomic, strong) NSOperationQueue *thumbnailQueue;
 
 @end
@@ -40,12 +40,12 @@ static NSInteger const PhotoCount = 25;
 	
     NSInteger photoIndex = 0;
     
-    for (NSUInteger a = 0; a < 12; a++) {
+    for (NSInteger a = 0; a < 12; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"Photo Album %d",a + 1];
         
         NSUInteger photoCount = arc4random()%4 + 2;
-        for (NSUInteger p = 0; p < photoCount; p++) {
+        for (NSInteger p = 0; p < photoCount; p++) {
             // there are up to 25 photos available to load from the code repository
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % 25];
             NSURL *photoURL = [urlPrefix URLByAppendingPathComponent:photoFilename];
@@ -59,10 +59,10 @@ static NSInteger const PhotoCount = 25;
     }
     
     [self.collectionView registerClass:[BHAlbumPhotoCell class]
-            forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier];
+            forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellKind];
     [self.collectionView registerClass:[BHAlbumTitleReusableView class]
-            forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleIdentifier
-                   withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier];
+            forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleKind
+                   withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleKind];
     
     self.thumbnailQueue = [[NSOperationQueue alloc] init];
     self.thumbnailQueue.maxConcurrentOperationCount = 3;
@@ -104,14 +104,16 @@ static NSInteger const PhotoCount = 25;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return ((BHAlbum *)self.albums[section]).photos.count;
+    BHAlbum *album = self.albums[section];
+    
+    return album.photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BHAlbumPhotoCell *photoCell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier
+        [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellKind
                                                   forIndexPath:indexPath];
     
     BHAlbum *album = self.albums[indexPath.section];
@@ -146,7 +148,7 @@ static NSInteger const PhotoCount = 25;
 {
     BHAlbumTitleReusableView *titleView =
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                           withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier
+                                           withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleKind
                                                   forIndexPath:indexPath];
     
     BHAlbum *album = self.albums[indexPath.section];

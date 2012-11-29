@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutPhotoCellIdentifier;
-FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutAlbumTitleIdentifier;
+FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutPhotoCellKind;
+FOUNDATION_EXPORT NSString * const BHPhotoAlbumLayoutAlbumTitleKind;
 
 @interface BHPhotoAlbumLayout : UICollectionViewLayout
 
