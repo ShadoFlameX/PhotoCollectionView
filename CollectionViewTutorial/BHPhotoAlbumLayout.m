@@ -113,7 +113,7 @@ static NSUInteger const RotationStride = 3;
     NSMutableArray *rotations = [NSMutableArray arrayWithCapacity:RotationCount];
     
     CGFloat percentage = 0.0f;
-    for (int i=0; i<RotationCount; i++) {
+    for (NSUInteger i=0; i<RotationCount; i++) {
         // ensure that each angle is different enough to be seen
         CGFloat newPercentage = 0.0f;
         do {
@@ -150,10 +150,10 @@ static NSUInteger const RotationStride = 3;
     
     [newLayoutInfo setObject:@{indexPath: emblemAttributes} forKey:BHPhotoEmblemIdentifier];
     
-    for (int section = 0; section < sectionCount; section++) {
+    for (NSUInteger section = 0; section < sectionCount; section++) {
         NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
         
-        for (int item = 0; item < itemCount; item++) {
+        for (NSUInteger item = 0; item < itemCount; item++) {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes =
@@ -196,7 +196,7 @@ static NSUInteger const RotationStride = 3;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    __block NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
+    NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
     
     [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier, NSDictionary *elementsInfo, BOOL *stop) {
         [elementsInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
@@ -234,14 +234,14 @@ static NSUInteger const RotationStride = 3;
     NSInteger row = indexPath.section / self.numberOfColumns;
     NSInteger column = indexPath.section % self.numberOfColumns;
     
-    CGFloat horzSpacing = self.collectionView.bounds.size.width -
-                          self.itemInsets.left -
-                          self.itemInsets.right -
-                          (self.numberOfColumns * self.itemSize.width);
+    CGFloat spacingX = self.collectionView.bounds.size.width -
+                       self.itemInsets.left -
+                       self.itemInsets.right -
+                       (self.numberOfColumns * self.itemSize.width);
     
-    if (self.numberOfColumns > 1) horzSpacing = horzSpacing / (self.numberOfColumns - 1);
+    if (self.numberOfColumns > 1) spacingX = spacingX / (self.numberOfColumns - 1);
     
-    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + horzSpacing) * column);
+    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
     
     CGFloat originY = floor(self.itemInsets.top +
                       (self.itemSize.height + self.titleHeight + self.interItemSpacingY) * row);
@@ -271,7 +271,7 @@ static NSUInteger const RotationStride = 3;
 - (CATransform3D)transformForAlbumPhotoAtIndex:(NSIndexPath *)indexPath
 {
     NSInteger offset = (indexPath.section * RotationStride + indexPath.item);
-    return [[self.rotations objectAtIndex:offset % RotationCount] CATransform3DValue];
+    return [self.rotations[offset % RotationCount] CATransform3DValue];
 }
 
 @end

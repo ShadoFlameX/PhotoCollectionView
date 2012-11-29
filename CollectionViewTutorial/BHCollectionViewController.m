@@ -40,12 +40,12 @@ static NSInteger const PhotoCount = 25;
 	
     NSInteger photoIndex = 0;
     
-    for (int a = 0; a < 12; a++) {
+    for (NSUInteger a = 0; a < 12; a++) {
         BHAlbum *album = [[BHAlbum alloc] init];
         album.name = [NSString stringWithFormat:@"Photo Album %d",a + 1];
         
-        int photoCount = arc4random()%4 + 2;
-        for (int p = 0; p < photoCount; p++) {
+        NSUInteger photoCount = arc4random()%4 + 2;
+        for (NSUInteger p = 0; p < photoCount; p++) {
             // there are up to 25 photos available to load from the code repository
             NSString *photoFilename = [NSString stringWithFormat:@"thumbnail%d.jpg",photoIndex % 25];
             NSURL *photoURL = [urlPrefix URLByAppendingPathComponent:photoFilename];
@@ -104,7 +104,7 @@ static NSInteger const PhotoCount = 25;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return ((BHAlbum *)[self.albums objectAtIndex:section]).photos.count;
+    return ((BHAlbum *)self.albums[section]).photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -114,8 +114,8 @@ static NSInteger const PhotoCount = 25;
         [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellIdentifier
                                                   forIndexPath:indexPath];
     
-    BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
-    BHPhoto *photo = [album.photos objectAtIndex:indexPath.item];
+    BHAlbum *album = self.albums[indexPath.section];
+    BHPhoto *photo = album.photos[indexPath.item];
     
     // load photo images in the background
     __weak BHCollectionViewController *weakSelf = self;
@@ -149,7 +149,7 @@ static NSInteger const PhotoCount = 25;
                                            withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleIdentifier
                                                   forIndexPath:indexPath];
     
-    BHAlbum *album = [self.albums objectAtIndex:indexPath.section];
+    BHAlbum *album = self.albums[indexPath.section];
     
     titleView.titleLabel.text = album.name;
     
