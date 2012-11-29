@@ -32,7 +32,7 @@ static NSInteger const PhotoCount = 25;
 {
     [super viewDidLoad];
     
-    self.collectionView.backgroundColor = [UIColor albumBrowserBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor bh_albumBrowserBackgroundColor];
     
     self.albums = [NSMutableArray array];
 

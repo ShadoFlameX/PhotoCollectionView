@@ -10,27 +10,27 @@
 
 @implementation UIColor (CollectionViewTutorial)
 
-+ (UIColor *)albumBrowserBackgroundColor
++ (UIColor *)bh_albumBrowserBackgroundColor
 {
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"concrete_wall"]];
 }
 
-+ (UIColor *)photoBackgroundColor
++ (UIColor *)bh_photoBackgroundColor
 {
     return [UIColor colorWithWhite:0.85f alpha:1.0f];
 }
 
-+ (UIColor *)photoBorderColor
++ (UIColor *)bh_photoBorderColor
 {
     return [UIColor whiteColor];
 }
 
-+ (UIColor *)albumTitleColor
++ (UIColor *)bh_albumTitleColor
 {
     return [UIColor colorWithWhite:1.0f alpha:1.0f];
 }
 
-+ (UIColor *)albumTitleShadowColor
++ (UIColor *)bh_albumTitleShadowColor
 {
     return [UIColor colorWithWhite:0.0f alpha:0.3f];
 }

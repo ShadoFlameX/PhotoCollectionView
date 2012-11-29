@@ -10,12 +10,12 @@
 
 @interface UIColor (CollectionViewTutorial)
 
-+ (UIColor *)albumBrowserBackgroundColor;
++ (UIColor *)bh_albumBrowserBackgroundColor;
 
-+ (UIColor *)photoBackgroundColor;
-+ (UIColor *)photoBorderColor;
++ (UIColor *)bh_photoBackgroundColor;
++ (UIColor *)bh_photoBorderColor;
 
-+ (UIColor *)albumTitleColor;
-+ (UIColor *)albumTitleShadowColor;
++ (UIColor *)bh_albumTitleColor;
++ (UIColor *)bh_albumTitleShadowColor;
 
 @end

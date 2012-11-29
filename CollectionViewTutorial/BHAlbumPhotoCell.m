@@ -25,9 +25,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor photoBackgroundColor];
+        self.backgroundColor = [UIColor bh_photoBackgroundColor];
         
-        self.layer.borderColor = [UIColor photoBorderColor].CGColor;
+        self.layer.borderColor = [UIColor bh_photoBorderColor].CGColor;
         self.layer.borderWidth = 3.0f;
         self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.layer.shadowRadius = 3.0f;
