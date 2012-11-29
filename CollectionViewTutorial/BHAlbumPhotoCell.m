@@ -8,7 +8,6 @@
 
 #import "BHAlbumPhotoCell.h"
 #import "UIColor+CollectionViewTutorial.h"
-#import "UIColor+CollectionViewTutorial.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface BHAlbumPhotoCell ()
