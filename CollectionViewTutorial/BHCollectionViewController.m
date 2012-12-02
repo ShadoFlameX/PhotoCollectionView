@@ -12,7 +12,6 @@
 #import "BHAlbum.h"
 #import "BHPhoto.h"
 #import "BHAlbumTitleReusableView.h"
-#import "UIColor+CollectionViewTutorial.h"
 
 static NSString * const PhotoCellIdentifier = @"PhotoCell";
 static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
@@ -33,7 +32,8 @@ static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
 {
     [super viewDidLoad];
     
-    self.collectionView.backgroundColor = [UIColor bh_albumBrowserBackgroundColor];
+    UIImage *patternImage = [UIImage imageNamed:@"concrete_wall"];
+    self.collectionView.backgroundColor = [UIColor colorWithPatternImage:patternImage];
     
     self.albums = [NSMutableArray array];
 

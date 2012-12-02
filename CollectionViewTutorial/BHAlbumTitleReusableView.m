@@ -7,7 +7,6 @@
 //
 
 #import "BHAlbumTitleReusableView.h"
-#import "UIColor+CollectionViewTutorial.h"
 
 @interface BHAlbumTitleReusableView ()
 
@@ -27,8 +26,8 @@
         self.titleLabel.backgroundColor = [UIColor clearColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:13.0f];
-        self.titleLabel.textColor = [UIColor bh_albumTitleColor];
-        self.titleLabel.shadowColor = [UIColor bh_albumTitleShadowColor];
+        self.titleLabel.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+        self.titleLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
         self.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
         
         [self addSubview:self.titleLabel];
