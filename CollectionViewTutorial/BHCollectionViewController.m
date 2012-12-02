@@ -7,8 +7,8 @@
 //
 
 #import "BHCollectionViewController.h"
-#import "BHAlbumPhotoCell.h"
 #import "BHPhotoAlbumLayout.h"
+#import "BHAlbumPhotoCell.h"
 #import "BHAlbum.h"
 #import "BHPhoto.h"
 #import "BHAlbumTitleReusableView.h"
