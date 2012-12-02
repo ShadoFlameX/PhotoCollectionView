@@ -14,7 +14,8 @@
 #import "BHAlbumTitleReusableView.h"
 #import "UIColor+CollectionViewTutorial.h"
 
-static NSInteger const PhotoCount = 25;
+static NSString * const PhotoCellIdentifier = @"PhotoCell";
+static NSString * const AlbumTitleIdentifier = @"AlbumTitle";
 
 @interface BHCollectionViewController ()
 
@@ -59,10 +60,10 @@ static NSInteger const PhotoCount = 25;
     }
     
     [self.collectionView registerClass:[BHAlbumPhotoCell class]
-            forCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellKind];
+            forCellWithReuseIdentifier:PhotoCellIdentifier];
     [self.collectionView registerClass:[BHAlbumTitleReusableView class]
             forSupplementaryViewOfKind:BHPhotoAlbumLayoutAlbumTitleKind
-                   withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleKind];
+                   withReuseIdentifier:AlbumTitleIdentifier];
     
     self.thumbnailQueue = [[NSOperationQueue alloc] init];
     self.thumbnailQueue.maxConcurrentOperationCount = 3;
@@ -113,7 +114,7 @@ static NSInteger const PhotoCount = 25;
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BHAlbumPhotoCell *photoCell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:BHPhotoAlbumLayoutPhotoCellKind
+        [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier
                                                   forIndexPath:indexPath];
     
     BHAlbum *album = self.albums[indexPath.section];
@@ -148,7 +149,7 @@ static NSInteger const PhotoCount = 25;
 {
     BHAlbumTitleReusableView *titleView =
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                           withReuseIdentifier:BHPhotoAlbumLayoutAlbumTitleKind
+                                           withReuseIdentifier:AlbumTitleIdentifier
                                                   forIndexPath:indexPath];
     
     BHAlbum *album = self.albums[indexPath.section];

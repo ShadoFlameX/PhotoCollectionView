@@ -9,9 +9,9 @@
 #import "BHPhotoAlbumLayout.h"
 #import "BHEmblemView.h"
 
-NSString * const BHPhotoAlbumLayoutPhotoCellKind = @"PhotoCell";
+static NSString * const BHPhotoAlbumLayoutPhotoCellKind = @"PhotoCell";
 NSString * const BHPhotoAlbumLayoutAlbumTitleKind = @"AlbumTitle";
-NSString * const BHPhotoEmblemKind = @"Emblem";
+static NSString * const BHPhotoEmblemKind = @"Emblem";
 
 static NSUInteger const PhotoCellBaseZIndex = 100;
 static NSUInteger const RotationCount = 32;
