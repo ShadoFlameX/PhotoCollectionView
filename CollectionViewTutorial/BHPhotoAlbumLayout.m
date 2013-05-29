@@ -245,7 +245,7 @@ static NSString * const BHPhotoEmblemKind = @"Emblem";
     CGFloat originY = floor(self.itemInsets.top +
                       (self.itemSize.height + self.titleHeight + self.interItemSpacingY) * row);
     
-    return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.width);
+    return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.height);
 }
 
 - (CGRect)frameForAlbumTitleAtIndexPath:(NSIndexPath *)indexPath
